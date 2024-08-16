@@ -1,0 +1,63 @@
+{
+  "contato": [
+    {
+      "id": "1",
+      "nome": "Howard Neto",
+      "email": "neto@gmail.com",
+      "telefone": "(123) 456-7890",
+      "categoriaId": 1
+    },
+    {
+      "id": "2",
+      "nome": "Howard Neto",
+      "email": "neto@gmail.com",
+      "telefone": "(987) 654-3211",
+      "categoriaId": 2
+    },
+    {
+      "id": "3",
+      "nome": "Bob Johnson",
+      "email": "bobjohnson@example.com",
+      "telefone": "(456) 789-0123",
+      "categoriaId": 1
+    },
+    {
+      "id": "4",
+      "nome": "Alice Wilson",
+      "email": "alwi@example.com",
+      "telefone": "(789) 012-3456",
+      "categoriaId": 3
+    },
+    {
+      "id": "5",
+      "nome": "Erik Dos Santos",
+      "email": "erikWag@Gmail.com",
+      "telefone": "(42) 123456789",
+      "categoriaId": 3
+    },
+    {
+      "id": "6",
+      "nome": "John Doe",
+      "email": "johndoe@example.com",
+      "telefone": "(123) 456-7890",
+      "categoriaId": 1
+    }
+  ],
+  "categoria": [
+    {
+      "categoriaId": 1,
+      "nomeCategoria": "normal",
+      "id": "f88b"
+    },
+    {
+      "categoriaId": 2,
+      "nomeCategoria": "favorito",
+      "id": "a945"
+    },
+    {
+      "categoriaId": 3,
+      "nomeCategoria": "emergencia",
+      "id": "2518"
+    }
+  ]
+}
