@@ -66,9 +66,8 @@ function ModalEdicao() {
         onClose={() => dispatch(modifyDialog(false))}
         PaperProps={{
           component: "form",
-          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+          onSubmit: (event: { preventDefault: () => void }) => {
             event.preventDefault();
-            dispatch(obterContato(toUpdateContato));
             console.log(toUpdateContato);
             updateHandler();
             dispatch(modifyDialog(false));
@@ -98,7 +97,11 @@ function ModalEdicao() {
                 defaultValue={getContato.nome}
                 label="Nome"
                 onChange={(e) => {
-                  setThisName(e.target.value);
+                  if (e.target.value !== e.target.defaultValue) {
+                    setThisName(e.target.value);
+                  } else {
+                    setThisName(getContato.nome);
+                  }
                 }}
               />
             </FormControl>
@@ -109,7 +112,11 @@ function ModalEdicao() {
                 defaultValue={getContato.email}
                 label="E-mail"
                 onChange={(e) => {
-                  setThisEmail(e.target.value);
+                  if (e.target.value !== e.target.defaultValue) {
+                    setThisEmail(e.target.value);
+                  } else {
+                    setThisEmail(getContato.nome);
+                  }
                 }}
               />
             </FormControl>
@@ -122,7 +129,11 @@ function ModalEdicao() {
                 defaultValue={getContato.telefone}
                 label="Telefone"
                 onChange={(e) => {
-                  setThisNumber(e.target.value);
+                  if (e.target.value !== e.target.defaultValue) {
+                    setThisNumber(e.target.value);
+                  } else {
+                    setThisNumber(getContato.telefone);
+                  }
                 }}
               />
             </FormControl>
