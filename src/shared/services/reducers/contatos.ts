@@ -7,7 +7,7 @@ type ContatoType = {
 
 const initialState: ContatoType = {
   contato: {
-    id: 0,
+    id: "",
     nome: "",
     email: "",
     telefone: "",

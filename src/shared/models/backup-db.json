@@ -48,13 +48,6 @@
       "email": "alwi@example.com",
       "telefone": "(789) 012-3456",
       "categoriaId": 3
-    },
-    {
-      "id": "8",
-      "nome": "Raymound Kares",
-      "email": "rayrak@email.com",
-      "telefone": "5696582314",
-      "categoriaId": 1
     }
   ],
   "categoria": [

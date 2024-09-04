@@ -20,16 +20,18 @@ function TelaRemoverContatos() {
   const query = useGetContatosQuery();
   const { data: listaContatos, isFetching } = query;
 
-  const deleteHandler = async (rest: number[]) => {
+  const deleteHandler = async (rest: string[]) => {
+    console.log(rest);
     for (var i = 0; i < rest.length; i++) {
       await deleteContato(rest[i]);
     }
   };
 
-  const listaIds: number[] = [];
+  const listaIds: string[] = [];
 
-  const handleClickAddContato = (e: string, id: number) => {
+  const handleClickAddContatoDelList = (e: string, id: string) => {
     listaIds.push(id);
+    console.log(listaIds);
   };
 
   return (
@@ -50,7 +52,7 @@ function TelaRemoverContatos() {
                       defaultChecked={false}
                       value={contato.id}
                       onChange={(e) =>
-                        handleClickAddContato(e.target.value, contato.id)
+                        handleClickAddContatoDelList(e.target.value, contato.id)
                       }
                     />
                   }

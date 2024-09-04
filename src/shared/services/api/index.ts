@@ -35,7 +35,7 @@ const api = createApi({
       }),
       invalidatesTags: ["Contatos"],
     }),
-    deleteContato: builder.mutation<void, string | number>({
+    deleteContato: builder.mutation<void, string>({
       query: (id) => ({
         url: `/contato/${id}`,
         method: "DELETE",

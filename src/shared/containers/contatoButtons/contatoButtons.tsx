@@ -10,7 +10,7 @@ import { modifyDialog } from "../../services/reducers/dialog";
 import { obterContato } from "../../services/reducers/contatos";
 
 export type IdProps = {
-  id: number;
+  id: string;
 };
 
 function ContatoButtons({ id }: IdProps) {

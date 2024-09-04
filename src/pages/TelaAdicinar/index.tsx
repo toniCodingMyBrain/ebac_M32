@@ -10,6 +10,7 @@ import {
 } from "../../shared/services/api";
 import { ReturnButton } from "../../shared/components/button/ReturnButton";
 import { useNavigate } from "react-router-dom";
+import { insertMaskInTel } from "../../shared/models/validation_tel";
 
 export const TelaAdicionarNovoContato = () => {
   const query = useGetContatosQuery();
@@ -23,12 +24,12 @@ export const TelaAdicionarNovoContato = () => {
 
   let novoId = 0;
   if (listaContatos !== undefined) {
-    novoId = listaContatos[listaContatos.length - 1].id;
-    novoId++;
+    const idString = listaContatos[listaContatos.length - 1].id;
+    novoId = parseInt(idString) + 1;
   }
 
   const contato = {
-    id: novoId,
+    id: novoId.toString(),
     nome: nome,
     email: email,
     telefone: telefone,
@@ -54,6 +55,7 @@ export const TelaAdicionarNovoContato = () => {
               id="outlined-basic"
               fullWidth
               label="Nome"
+              type="text"
               variant="outlined"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
@@ -63,6 +65,7 @@ export const TelaAdicionarNovoContato = () => {
               id="outlined-basic"
               fullWidth
               label="E-mail"
+              type="email"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -72,12 +75,17 @@ export const TelaAdicionarNovoContato = () => {
               id="outlined-basic"
               fullWidth
               label="Telefone"
+              type="tel"
               variant="outlined"
               value={telefone}
               onChange={(e) => setTelefone(e.target.value)}
             />
             <Stack spacing={2} direction="row" className="button_stack">
-              <Button variant="outlined" color="error">
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => navigate("/paginaInicial")}
+              >
                 Cancelar
               </Button>
               <Button
