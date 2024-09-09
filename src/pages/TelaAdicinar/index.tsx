@@ -10,7 +10,6 @@ import {
 } from "../../shared/services/api";
 import { ReturnButton } from "../../shared/components/button/ReturnButton";
 import { useNavigate } from "react-router-dom";
-import { insertMaskInTel } from "../../shared/models/validation_tel";
 
 export const TelaAdicionarNovoContato = () => {
   const query = useGetContatosQuery();

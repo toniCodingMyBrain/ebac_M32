@@ -11,7 +11,6 @@ import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { modifyDialog } from "../../services/reducers/dialog";
 import { useUpdadeContatoMutation } from "../../services/api";
-import { obterContato } from "../../services/reducers/contatos";
 
 // ToDo: implementar lista de números de telefones. Para que possa ser adicionado mais de um.
 // Isso pode ser feito utilizando um botão de + ao lado.
