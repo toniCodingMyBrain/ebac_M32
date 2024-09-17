@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Contatos } from "../../models/Contato_model";
+import type { Contatos } from "../../models/Contato_model";
 
 const api = createApi({
   reducerPath: "api_agenda_telefonica",
@@ -21,7 +21,7 @@ const api = createApi({
     }),
     postContato: builder.mutation<void, Contatos>({
       query: (novoContato) => ({
-        url: `/contato`,
+        url: "/contato",
         method: "POST",
         body: novoContato,
       }),
