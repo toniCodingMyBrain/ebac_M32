@@ -3,15 +3,15 @@
     {
       "id": "1",
       "nome": "Lenora Mendoza",
-      "email": "mendoLeno@gmail.com",
-      "telefone": "4196589325",
+      "email": "lenor@emailnovo.com",
+      "telefone": "+554896582",
       "categoriaId": 1
     },
     {
       "id": "2",
       "nome": "Howard Neto",
       "email": "neto@gmail.com",
-      "telefone": "(987) 654-3211",
+      "telefone": "(987) 654-3212",
       "categoriaId": 2
     },
     {
@@ -48,13 +48,6 @@
       "email": "alwi@example.com",
       "telefone": "(789) 012-3456",
       "categoriaId": 3
-    },
-    {
-      "id": "8",
-      "nome": "Raymound Kares",
-      "email": "rayrak@email.com",
-      "telefone": "5696582314",
-      "categoriaId": 1
     }
   ],
   "categoria": [

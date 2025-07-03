@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { modifyDialog } from "../../services/reducers/dialog";
 import { useUpdadeContatoMutation } from "../../services/api";
+import { RootReducer } from "../../services";
 
 // ToDo: implementar lista de números de telefones. Para que possa ser adicionado mais de um.
 // Isso pode ser feito utilizando um botão de + ao lado.
@@ -22,8 +23,8 @@ import { useUpdadeContatoMutation } from "../../services/api";
 // ToDo: adicionar biblioteca Toastify para renderizar mensagens de feedback das funções.
 
 function ModalEdicao() {
-  const setIsOpen: boolean = useAppSelector((state) => state.dialog.isOpen);
-  const getContato = useAppSelector((state) => state.contatos.contato);
+  const setIsOpen: boolean = useAppSelector((state: RootReducer) => state.dialog.isOpen);
+  const getContato = useAppSelector((state: RootReducer) => state.contatos.contato);
   const dispatch = useAppDispatch();
   const [updateContato] = useUpdadeContatoMutation();
 
@@ -31,19 +32,38 @@ function ModalEdicao() {
   const [thisEmail, setThisEmail] = React.useState(getContato.email);
   const [thisNumber, setThisNumber] = React.useState(getContato.telefone);
 
-  const toUpdateContato = {
-    id: getContato.id,
-    nome: thisName,
-    email: thisEmail,
-    telefone: thisNumber,
-    categoriaId: getContato.categoriaId,
+  React.useEffect(() => {
+    if (getContato) {
+      setThisName(getContato.nome || "");
+      setThisEmail(getContato.email || "");
+      setThisNumber(getContato.telefone || "");
+    }
+  }, [getContato]);
+
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!getContato || typeof getContato.id === "undefined") {
+      console.log("Dados do contato inválidos ou ausentes para atualização.");
+      dispatch(modifyDialog(false));
+      return;
+    }
+
+    const updatedContato = {
+      id: getContato.id,
+      nome: thisName,
+      email: thisEmail,
+      telefone: thisNumber,
+      categoriaId: getContato.categoriaId,
+    };
+
+    console.log("Enviando para atualização: ", updatedContato);
+    await updateContato(updatedContato);
+
+    dispatch(modifyDialog(false));
+    window.scrollTo(0, 0);
   };
 
-  const updateHandler = async () => {
-    await updateContato(toUpdateContato);
-  };
-
-  const catContato = (catId: string | number | undefined) => {
+  const categoryContato = (catId: string | number | undefined) => {
     if (catId === 1) {
       return `Contato normal.`;
     } else if (catId === 2) {
@@ -54,7 +74,6 @@ function ModalEdicao() {
   };
 
   const cancelHandler = () => {
-    updateContato(getContato);
     dispatch(modifyDialog(false));
   };
 
@@ -65,13 +84,7 @@ function ModalEdicao() {
         onClose={() => dispatch(modifyDialog(false))}
         PaperProps={{
           component: "form",
-          onSubmit: (event: { preventDefault: () => void }) => {
-            event.preventDefault();
-            console.log(toUpdateContato);
-            updateHandler();
-            dispatch(modifyDialog(false));
-            window.scrollTo(0, 0);
-          },
+          onSubmit: handleFormSubmit,
         }}
       >
         <DialogTitle color="primary">Atualize este contato</DialogTitle>
@@ -120,9 +133,7 @@ function ModalEdicao() {
               />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor="component-outlined">
-                Telefone{` (s)`}
-              </InputLabel>
+              <InputLabel htmlFor="component-outlined">Telefone{` (s)`}</InputLabel>
               <OutlinedInput
                 id="component-outlined"
                 defaultValue={getContato.telefone}
@@ -137,12 +148,10 @@ function ModalEdicao() {
               />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor="component-outlined">
-                Categoria do contato
-              </InputLabel>
+              <InputLabel htmlFor="component-outlined">Categoria do contato</InputLabel>
               <OutlinedInput
                 id="component-outlined"
-                defaultValue={catContato(getContato.categoriaId)}
+                defaultValue={categoryContato(getContato.categoriaId)}
                 label="Contato normal"
               />
             </FormControl>
